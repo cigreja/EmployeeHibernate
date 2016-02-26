@@ -1,0 +1,103 @@
+/*
+    main.css
+    Created on : Feb 6, 2016, 4:02:07 PM
+    Author     : Carlos Igreja
+*/
+
+/* reset */
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* general */
+body{
+    margin: 0px;
+    padding: 20px;
+}
+
+
+/* header */
+#header {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: black;
+    color: white;
+    font-size: 75px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+}
+
+/* navigation */
+#navigation{
+    margin: 20px auto;
+    background: white;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+}
+
+#navigation ul{
+    margin: 20px auto;
+    padding: 0px;
+}
+
+#navigation ul li{
+    display: inline;
+    border-radius: 5px;
+}
+
+#navigation ul li a{
+    padding: 10px;
+    background: black;
+    color: gray;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+#navigation ul li a:visited{
+    background: black;
+    color: gray;
+    border-radius: 5px;
+}
+
+#navigation ul li a:hover{
+    background: black;
+    color: white;
+    border-radius: 5px;
+}
+
+#navigation ul li a.selected{
+    background: black;
+    color: white;
+    border-radius: 5px;
+}
+
+.divContainer{
+    display: inline-block;
+}
+
+.divHeader{
+    margin: 20px auto;
+    background: black; 
+    color: white; 
+    text-align: center;
+    border-radius: 5px;
+}
+
+.divBody{
+    border: thin solid black;
+    background: white;
+    color: black;
+}
+
+.divBodyLabel{
+    float: left;
+}
+
+.divBodyInput{
+    
+}
