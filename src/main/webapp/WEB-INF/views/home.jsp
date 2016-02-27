@@ -138,14 +138,14 @@
     </center>
 
     <!-- EMPLOYEE ADDRESSES --> 
-    <c:if test="${addresses} != null">
+    <c:if test=" ${addresses} == null">
         <center>
             <div class="divContainer">
                 <div class="divHeader">
                     Employee Addresses
                     <div class="divBody" >
                         <c:forEach var="address" items="${addresses}">
-                            <p><c:out value="${address}" /></p>
+                            <p><c:out value="${address.address}" /></p>
                         </c:forEach>
                     </div>
                 </div>
