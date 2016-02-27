@@ -12,7 +12,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @since  Feb 21, 2016
  */
 @Configuration
-@Import(DataConfig.class)
+//@Import(DataConfig.class)
+@Import(RepositoryTestConfig.class)
 @ComponentScan("com.cigreja.employeewebsite.data.hibernate")
 public class RootConfig {
 

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,8 +40,8 @@ public class AddController {
         //double salary = Double.parseDouble(request.getParameter("salary"));
         
         // begin transaction
-        Session session = repository.getSession();
-        session.getTransaction().begin();
+        //Session session = repository.getSession();
+        //session.getTransaction().begin();
         
         // check if user is already in the database
         Employee employee = repository.getEmployee(firstName,lastName);
@@ -50,18 +51,14 @@ public class AddController {
             employee = new Employee(firstName, lastName);
             employee.getAddresses().add(address);
             address.getEmployees().add(employee);
-            session.save(employee);
-            session.save(address);
+            repository.save(employee, address);
         }
         else{
-            List<Address> addresses;
-            addresses = employee.getAddresses();
-            if(!containsAddress(addresses, address)){
+            if(!repository.containsAddress(employee, address)){
                 System.out.println("!employee.getAddresses().contains(address)");
                 employee.getAddresses().add(address);
                 address.getEmployees().add(employee);
-                session.save(employee);
-                session.save(address);
+                repository.save(employee, address);
             }
             else{
                 // display error employee address already exists
@@ -70,17 +67,7 @@ public class AddController {
         }
         
         // end transaction
-        session.getTransaction().commit();
+        //session.getTransaction().commit();
         return new ModelAndView(view,model);
-    }
-    
-    public boolean containsAddress(List<Address> addresses, Address address){
-        
-        for(Address a : addresses){
-            if(address.getAddress().equals(a.getAddress())){
-                return true;
-            }
-        }
-        return false;
     }
 }

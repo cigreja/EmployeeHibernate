@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * HibernateEmployeeRepository
@@ -18,28 +19,58 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class HibernateEmployeeRepository {
     
-    SessionFactory sessionFactory;
-    Session session;
-    
     @Autowired
-    public HibernateEmployeeRepository(SessionFactory sessionFactory){
-        this.sessionFactory = sessionFactory;
-        this.session = sessionFactory.openSession();
-    }
+    SessionFactory sessionFactory;
     
-    public Session getSession(){
-        return session;
-    }
+//    @Autowired
+//    public HibernateEmployeeRepository(SessionFactory sessionFactory){
+//        this.sessionFactory = sessionFactory;
+//    }
+    
+//    public Session getSession(){
+//        return sessionFactory.getCurrentSession();
+//    }
     
     /* EMPLOYEE METHODS */
     
+    @Transactional
     public Employee getEmployee(String firstName, String lastName){
-        Query query = session.createQuery("from Employee "
+        Query query = sessionFactory.getCurrentSession().createQuery("from Employee "
                                          + "where FIRST_NAME =:firstName "
                                          + "and LAST_NAME =:lastName");
         query.setString("firstName", firstName);
         query.setString("lastName", lastName);
         Object o = query.uniqueResult();
         return(o == null)?null:(Employee)o;
+    }
+    
+    @Transactional
+    public void save(Employee employee){
+        sessionFactory.getCurrentSession().save(employee);
+    }
+    
+    @Transactional
+    public void save(Address address){
+        sessionFactory.getCurrentSession().save(address);
+    }
+    
+    @Transactional
+    public void save(Employee employee, Address address){
+        sessionFactory.getCurrentSession().save(employee);
+        sessionFactory.getCurrentSession().save(address);
+    }
+    
+    @Transactional
+    public boolean containsAddress(Employee employee, Address address){
+        
+        List<Address> addresses;
+        addresses = employee.getAddresses();
+            
+        for(Address a : addresses){
+            if(address.getAddress().equals(a.getAddress())){
+                return true;
+            }
+        }
+        return false;
     }
 }

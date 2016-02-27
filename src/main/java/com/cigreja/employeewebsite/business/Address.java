@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import static javax.persistence.FetchType.EAGER;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -28,8 +28,13 @@ public class Address {
     private String address;
     
     @Column(name = "EMPLOYEE")
-    @ManyToMany(mappedBy = "addresses")
+    @ManyToMany(mappedBy = "addresses", fetch = EAGER)
     private List<Employee> employees = new ArrayList<>();
+    
+    // default zero argument constructor
+    public Address(){
+        this(null);
+    }
 
     public Address(String address) {
         this.address = address;

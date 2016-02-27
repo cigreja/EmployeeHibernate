@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import static javax.persistence.FetchType.EAGER;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -33,7 +35,7 @@ public class Employee {
     @Column(name = "SALARY")
     private double salary;
 
-    @ManyToMany()
+    @ManyToMany(fetch = EAGER)
     @Column(name = "ADDRESS")
     private List<Address> addresses = new ArrayList<>();
 
