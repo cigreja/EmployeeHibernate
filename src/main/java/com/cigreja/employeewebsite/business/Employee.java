@@ -30,9 +30,6 @@ public class Employee {
     
     @Column(name = "LAST_NAME")
     private String lastName;
-    
-    @Column(name = "SALARY")
-    private double salary;
 
     @ManyToMany(fetch = EAGER)
     @Column(name = "ADDRESS")
@@ -40,17 +37,12 @@ public class Employee {
 
     // default zero argument constructor
     public Employee(){
-        this(null,null,0);
+        this(null,null);
     }
     
-    public Employee(String firstName, String lastName){
-        this(firstName,lastName,0);
-    }
-    
-    public Employee(String firstName, String lastName, double salary) {
+    public Employee(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.salary = salary;
     }
 
     public int getEmployeeID() {
@@ -59,14 +51,6 @@ public class Employee {
 
     public void setEmployeeID(int employeeID) {
         this.employeeID = employeeID;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
     }
 
     public String getFirstName() {

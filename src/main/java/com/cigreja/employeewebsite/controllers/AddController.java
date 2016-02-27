@@ -34,7 +34,6 @@ public class AddController {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         Address address = new Address(request.getParameter("address"));
-        //double salary = Double.parseDouble(request.getParameter("salary"));
         
         // check if user is already in the database
         Employee employee = repository.getEmployee(firstName,lastName);
