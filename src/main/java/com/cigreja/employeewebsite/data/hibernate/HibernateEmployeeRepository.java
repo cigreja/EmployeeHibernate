@@ -17,50 +17,30 @@ import org.springframework.transaction.annotation.Transactional;
  * @since  Feb 19, 2016
  */
 @Repository
+@Transactional
 public class HibernateEmployeeRepository {
     
     @Autowired
     SessionFactory sessionFactory;
     
-//    @Autowired
-//    public HibernateEmployeeRepository(SessionFactory sessionFactory){
-//        this.sessionFactory = sessionFactory;
-//    }
+    public Session session(){
+        return sessionFactory.getCurrentSession();
+    }
     
-//    public Session getSession(){
-//        return sessionFactory.getCurrentSession();
-//    }
-    
-    /* EMPLOYEE METHODS */
-    
-    @Transactional
     public Employee getEmployee(String firstName, String lastName){
-        Query query = sessionFactory.getCurrentSession().createQuery("from Employee "
+        Query query = session().createQuery("from Employee "
                                          + "where FIRST_NAME =:firstName "
                                          + "and LAST_NAME =:lastName");
         query.setString("firstName", firstName);
         query.setString("lastName", lastName);
-        Object o = query.uniqueResult();
-        return(o == null)?null:(Employee)o;
+        return (Employee)query.uniqueResult();
     }
     
-    @Transactional
-    public void save(Employee employee){
-        sessionFactory.getCurrentSession().save(employee);
-    }
-    
-    @Transactional
-    public void save(Address address){
-        sessionFactory.getCurrentSession().save(address);
-    }
-    
-    @Transactional
     public void save(Employee employee, Address address){
-        sessionFactory.getCurrentSession().save(employee);
-        sessionFactory.getCurrentSession().save(address);
+        session().save(employee);
+        session().save(address);
     }
-    
-    @Transactional
+   
     public boolean containsAddress(Employee employee, Address address){
         
         List<Address> addresses;

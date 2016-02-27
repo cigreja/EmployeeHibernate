@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import static javax.persistence.FetchType.EAGER;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -93,6 +92,4 @@ public class Employee {
     public void setAddress(List<Address> addresses) {
         this.addresses = addresses;
     }
-
-    
 }
