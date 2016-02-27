@@ -31,6 +31,7 @@ public class Address {
     @ManyToMany(mappedBy = "addresses", fetch = EAGER)
     private List<Employee> employees = new ArrayList<>();
     
+    
     // default zero argument constructor
     public Address(){
         this(null);

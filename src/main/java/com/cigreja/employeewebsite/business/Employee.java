@@ -34,6 +34,7 @@ public class Employee {
     @ManyToMany(fetch = EAGER)
     @Column(name = "ADDRESS")
     private List<Address> addresses = new ArrayList<>();
+    
 
     // default zero argument constructor
     public Employee(){
