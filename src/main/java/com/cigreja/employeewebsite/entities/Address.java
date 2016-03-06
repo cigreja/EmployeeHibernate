@@ -21,7 +21,7 @@ public class Address {
     
     private String address;
 
-    @ManyToMany(mappedBy = "addresses",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "addresses",fetch = FetchType.LAZY)
     @Column(name = "EMPLOYEE", table = "Map")
     private List<Employee> employees = new ArrayList<>();
 
@@ -57,4 +57,6 @@ public class Address {
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
+
+
 }

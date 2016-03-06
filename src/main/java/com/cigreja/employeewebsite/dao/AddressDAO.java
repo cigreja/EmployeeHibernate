@@ -45,6 +45,7 @@ public class AddressDAO {
                 return a;
             }
         }
+        session().save(address);
         return address;
     }
 
