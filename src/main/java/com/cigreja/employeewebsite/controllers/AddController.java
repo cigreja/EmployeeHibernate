@@ -1,16 +1,21 @@
 
 package com.cigreja.employeewebsite.controllers;
 
-import com.cigreja.employeewebsite.business.Address;
-import com.cigreja.employeewebsite.business.Employee;
-import com.cigreja.employeewebsite.data.hibernate.HibernateEmployeeRepository;
-import java.util.HashMap;
-import javax.servlet.http.HttpServletRequest;
+import com.cigreja.employeewebsite.dao.AddressDAO;
+import com.cigreja.employeewebsite.dao.EmployeeDAO;
+import com.cigreja.employeewebsite.entities.Address;
+import com.cigreja.employeewebsite.entities.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * AddController
@@ -22,41 +27,42 @@ import org.springframework.web.servlet.ModelAndView;
 public class AddController {
     
     @Autowired
-    HibernateEmployeeRepository repository;
+    EmployeeDAO employeeDAO;
+
+    @Autowired
+    AddressDAO addressDAO;
 
     @RequestMapping(method = POST)
-    public ModelAndView add(HttpServletRequest request){
-        
-        HashMap<String,Object> model = new HashMap<>();
-        String view = "home";
-            
-        // get posted information
+    public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        // Response Writer
+        response.setContentType("text/plain");
+        PrintWriter writer = response.getWriter();
+
+        // Get Employee
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
+        Employee employee = employeeDAO.getEmployee(firstName,lastName);
+
+        // Get Address
         Address address = new Address(request.getParameter("address"));
-        
-        // check if user is already in the database
-        Employee employee = repository.getEmployee(firstName,lastName);
-        if(employee == null){
-            System.out.println("employee == null");
-            // create new employee
-            employee = new Employee(firstName, lastName);
-            employee.getAddresses().add(address);
-            address.getEmployees().add(employee);
-            repository.save(employee, address);
-        }
-        else{
-            if(!repository.containsAddress(employee, address)){
-                employee.getAddresses().add(address);
-                address.getEmployees().add(employee);
-                repository.save(employee, address);
+        List<Address> allAddresses = addressDAO.getAddresses();
+        address = addressDAO.containsAddress(allAddresses,address); // use existing
+
+        // Check If Employee Address Already Exists
+        List<Address> employeeAddresses = addressDAO.getAddresses(employee);
+        if(!addressDAO.addressExists(employeeAddresses,address)){
+
+            // Add Employee Address
+            if(employeeDAO.addAddress(employee,address)){
+                writer.print("Add successful!");
             }
             else{
-                // display error employee address already exists
-                model.put("addErrMsg", "Employee address already exists");
+                writer.print("Failed to add!");
             }
         }
-
-        return new ModelAndView(view,model);
+        else{
+            writer.print("Employee address already exists");
+        }
     }
 }

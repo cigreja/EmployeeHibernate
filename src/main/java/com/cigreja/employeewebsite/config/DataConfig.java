@@ -1,7 +1,7 @@
 package com.cigreja.employeewebsite.config;
 
-import com.cigreja.employeewebsite.business.Address;
-import com.cigreja.employeewebsite.business.Employee;
+import com.cigreja.employeewebsite.entities.Address;
+import com.cigreja.employeewebsite.entities.Employee;
 import java.io.IOException;
 import java.util.Properties;
 import javax.sql.DataSource;

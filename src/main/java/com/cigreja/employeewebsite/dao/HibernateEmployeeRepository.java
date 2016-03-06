@@ -1,8 +1,8 @@
 
-package com.cigreja.employeewebsite.data.hibernate;
+package com.cigreja.employeewebsite.dao;
 
-import com.cigreja.employeewebsite.business.Address;
-import com.cigreja.employeewebsite.business.Employee;
+import com.cigreja.employeewebsite.entities.Address;
+import com.cigreja.employeewebsite.entities.Employee;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;

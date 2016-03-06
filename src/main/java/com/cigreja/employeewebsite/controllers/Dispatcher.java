@@ -1,13 +1,12 @@
 
 package com.cigreja.employeewebsite.controllers;
 
-import com.cigreja.employeewebsite.business.User;
+import com.cigreja.employeewebsite.entities.User;
 import java.util.HashMap;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
-import org.springframework.http.HttpRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;

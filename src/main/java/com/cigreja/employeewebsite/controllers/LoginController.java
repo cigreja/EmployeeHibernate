@@ -1,7 +1,7 @@
 
 package com.cigreja.employeewebsite.controllers;
 
-import com.cigreja.employeewebsite.business.User;
+import com.cigreja.employeewebsite.entities.User;
 import java.util.HashMap;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

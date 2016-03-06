@@ -1,15 +1,9 @@
 
-package com.cigreja.employeewebsite.business;
+package com.cigreja.employeewebsite.entities;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import static javax.persistence.FetchType.EAGER;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
 /**
  * Address
@@ -26,12 +20,11 @@ public class Address {
     private int addressID;
     
     private String address;
-    
-    @Column(name = "EMPLOYEE")
-    @ManyToMany(mappedBy = "addresses", fetch = EAGER)
+
+    @ManyToMany(mappedBy = "addresses",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Column(name = "EMPLOYEE", table = "Map")
     private List<Employee> employees = new ArrayList<>();
-    
-    
+
     // default zero argument constructor
     public Address(){
         this(null);
