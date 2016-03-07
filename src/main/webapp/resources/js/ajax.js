@@ -53,6 +53,10 @@ $(document).ready(function () {
 
             $.post('Get', details)
                 .done(function(data){
+                    //$('#getMsg').html(data);
+                    var jsonObject = JSON.parse(data);
+                    alert("data.id = " + jsonObject.addresses[0].id);
+                    alert("data.address = " + jsonObject.addresses[0].address);
                     alert("data = " + data);
                 })
                 .fail(function(){

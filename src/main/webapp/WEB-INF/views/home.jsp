@@ -111,7 +111,7 @@
 
 <!-- GET EMPLOYEE -->
 <center>
-    <p><span style="color: red;">${getErrMsg}</span></p>
+    <p><span id="getMsg" style="color: red;"></span></p>
     <div id="getEmployeeDiv" class="divContainer">
         <div class="divHeader">
             Get Employee Addresses
@@ -140,6 +140,7 @@
                                 </td>
                             </tr>
                         </table>
+                        <input type="reset" value="Clear">
                         <input id="getBtn" type="submit" value="Submit"/>
                     </center>
                 </form>
@@ -165,6 +166,7 @@
 </c:if>
 
 <!-- ADDRESSES TEST -->
+<!--
 <center>
     <div id="displayAddressesDivTest" class="divContainer">
         <div class="divHeader">
@@ -175,11 +177,12 @@
         </div>
     </div>
 </center>
+-->
 
-<!-- NEW BOOTSTRAP DIV FOR DISPLAYING EMPLOYEES -->
-<div class="container">
+<!-- BOOTSTRAP DIV FOR DISPLAYING EMPLOYEES -->
+<div id="employeesDiv" class="container">
     <div class="page-header">
-        <h1>Get Employee</h1>
+        <h1>Employees</h1>
     </div>
 
     <table class="table table-inverse">
@@ -188,7 +191,45 @@
             <th>#</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Username</th>
+            <th>Address</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- BOOTSTRAP DIV FOR DISPLAYING ADDRESSES -->
+<div id="addressesDiv" class="container">
+    <div class="page-header">
+        <h1>Addresses</h1>
+    </div>
+
+    <table class="table table-inverse">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Address</th>
         </tr>
         </thead>
         <tbody>

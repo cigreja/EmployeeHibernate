@@ -41,8 +41,9 @@ public class GetController {
         PrintWriter out = null;
 
         // json object for test
-        JSONObject jsonObject = new JSONObject();
-        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObjectAddress = new JSONObject();
+        JSONArray jsonArrayAddresses = new JSONArray();
+        JSONObject jsonObjectModel = new JSONObject();
 
         try {
             out = response.getWriter();
@@ -60,17 +61,23 @@ public class GetController {
         if(employee != null){
             addressDAO.getAddresses(employee);
             List<Address> addresses = addressDAO.getAddresses(employee);
-            if(!addresses.isEmpty()) {
-                for (Address a : addresses) {
-                    try {
-                        jsonObject.put("id", a.getAddressID());
-                        jsonObject.put("address", a.getAddress());
-                        jsonArray.put(jsonObject);
-                    } catch (JSONException ex) {
-                        out.print("JSONException");
+            if (!addresses.isEmpty()) {
+                try {
+                    for (Address a : addresses) {
+
+                        jsonObjectAddress.put("id", a.getAddressID());
+                        jsonObjectAddress.put("address", a.getAddress());
+                        jsonArrayAddresses.put(jsonObjectAddress);
+
                     }
+
+                    jsonObjectModel.put("addresses", jsonArrayAddresses);
+                    System.out.println(jsonObjectModel);
+                    out.print(jsonObjectModel);
+
+                } catch (JSONException ex) {
+                    out.print("JSONException");
                 }
-                out.print(jsonArray);
             }
             else{
                 out.print("There are no addresses for this employee");

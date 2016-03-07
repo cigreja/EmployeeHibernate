@@ -14,11 +14,14 @@ app1.controller("ctrl1", function($scope,$http){
     /**
      * initially start on add employee page
      */
-    // jquery to show the add employee divs
+    // show the add employee divs
     $("#addEmployeeDiv").show();
+    $("#employeesDiv").show();
 
-    // jquery to hide the employee divs
+    // hide the get employee divs
     $("#getEmployeeDiv").hide();
+    $("#addressesDiv").hide();
+
 
     /**
      * FUNCTIONS
@@ -32,11 +35,13 @@ app1.controller("ctrl1", function($scope,$http){
         $scope.addNavSelection = "selected";
         $scope.getNavSelection = "";
 
-        // jquery to show the add employee divs
+        // show the add employee divs
         $("#addEmployeeDiv").show();
+        $("#employeesDiv").show();
 
-        // jquery to hide the employee divs
+        // hide the get employee divs
         $("#getEmployeeDiv").hide();
+        $("#addressesDiv").hide();
 
     }
     
@@ -44,11 +49,14 @@ app1.controller("ctrl1", function($scope,$http){
         $scope.addNavSelection = "";
         $scope.getNavSelection = "selected";
 
-        // jquery to hide the add employee divs
-        $("#addEmployeeDiv").hide();
-
-        // jquery to show the employee divs
+        // show the get employee divs
         $("#getEmployeeDiv").show();
+        $("#addressesDiv").show();
+
+        // hide the add employee divs
+        $("#addEmployeeDiv").hide();
+        $("#employeesDiv").hide();
+
     }
 });
 
